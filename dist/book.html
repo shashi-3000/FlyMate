@@ -104,6 +104,18 @@
                     </div>
                 </div>
 
+                <!-- max stops -->
+                 <div>
+                    <label for="maxStops" class="block font-semibold text-blue-800 mb-1">Max Stops</label>
+                    <select id="maxStops" name="maxStops" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-sky-400">
+                        <option value="0">Direct Only</option>
+                        <option value="1">Up to 1 Stop</option>
+                        <option value="2">Up to 2 Stops</option>
+                        <option value="1000">Any</option>
+                    </select>
+                </div>
+
+
                 <button type="submit" class="w-full bg-blue-800 text-white py-3 rounded-lg font-bold hover:bg-blue-900 transition">
                     Search Flights
                 </button>
@@ -255,7 +267,7 @@
         }
     </script> -->
     <script src="routesGraph.js"></script>
-    <script>
+    <!-- <script>
         document.getElementById("bookingForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
@@ -325,8 +337,74 @@
                 });
             });
         }
-    </script>
+    </script> -->
 
+    <script>
+
+        document.getElementById("bookingForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const bookingDetails = {
+                from: document.getElementById("from").value,
+                to: document.getElementById("to").value,
+                departureDate: document.getElementById("departureDate").value,
+                returnDate: document.getElementById("returnDate").value,
+                travelClass: document.getElementById("travelClass").value,
+                passengers: parseInt(document.getElementById("passengers").value),
+                maxStops: parseInt(document.getElementById("maxStops").value)
+            };
+
+            localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
+
+            const result = dijkstraWithKStops(bookingDetails.from, bookingDetails.to, bookingDetails.maxStops);
+
+            const resultsDiv = document.getElementById("flight-results");
+            resultsDiv.innerHTML = ""; // Clear previous results
+
+            if (!result.path || result.path.length < 2 || result.path[0] !== bookingDetails.from || result.path[result.path.length - 1] !== bookingDetails.to) {
+                resultsDiv.innerHTML = `<p class='text-blue text-center'>No flights found for your route.</p>`;
+                return;
+            }
+
+
+            showFlightPath(result.path, result.totalCost);
+        });
+
+        function showFlightPath(path, totalCost) {
+            const results = document.getElementById("flight-results");
+            results.innerHTML = "";
+
+            path.forEach((city, i) => {
+                if (i === path.length - 1) return; // skip last city as it's the destination
+
+                const from = path[i];
+                const to = path[i + 1];
+                const price = graph[from][to].price;
+
+                const card = document.createElement("div");
+                card.className = "bg-white p-6 rounded-lg shadow text-blue-900";
+
+                card.innerHTML = `
+                    <h3 class="text-2xl font-bold">FlyMate Airways</h3>
+                    <p><strong>From:</strong> ${from}</p>
+                    <p><strong>To:</strong> ${to}</p>
+                    <p><strong>Departure:</strong> 08:00 AM</p>
+                    <p><strong>Arrival:</strong> 11:00 AM</p>
+                    <p><strong>Price:</strong> ₹${price}</p>
+                `;
+
+                results.appendChild(card);
+            });
+
+            // Total cost summary
+            const totalBlock = document.createElement("div");
+            totalBlock.className = "text-white text-xl font-semibold mt-6 text-center";
+            totalBlock.textContent = `Total Cost: ₹${totalCost}`;
+            results.appendChild(totalBlock);
+        }
+
+
+    </script>
 
 
 </body>
