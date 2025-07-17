@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FlyMate</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
 </head>
 <body>
 
@@ -19,11 +18,11 @@
 
         <ul class="font-mullish font-semibold hidden md:flex text-white ">
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="#">Explore</a>
+                <a href="/dist/index.html">Explore</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="#">Book</a>
+                <a href="/dist/book.html">Book</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
@@ -37,8 +36,8 @@
         </ul>
 
         <div class="hidden md:flex gap-3">
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Login</button>
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Sign In</button>
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
         </div>
 
         <div class="md:hidden">
@@ -103,16 +102,9 @@
             </select>
 
             <label for="date" class="text-white font-semibold">Date:</label>
-            <input type="date" id="date" name="date" class="p-2 rounded" />
+            <input type="date" id="date" name="date" class="p-2 rounded" />      
 
-            <label for="class" class="text-white font-semibold">Class:</label>
-            <select id="class" name="class" class="p-2 rounded">
-                <option value="Economy">Economy</option>
-                <option value="Business">Business</option>
-                <option value="First Class">First Class</option>
-            </select>        
-
-            <button type="submit" class="bg-white text-deepBlue font-semibold px-4 py-2 rounded">Search Flights</button>
+            <button type="submit" class="bg-white text-deepBlue font-semibold px-4 py-2 rounded"><a href="/dist/book.html">Search Flights</a></button>
         </form>
     </section>
     <!-- Hero ends here -->
@@ -252,8 +244,8 @@
                 </ul>
                 <!-- Buttons -->
                 <div class="flex flex-col md:flex-row gap-4 pt-6 justify-center md:justify-start">
-                    <button class="bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-sky-400 shadow-md transition">BOOK NOW</button>
-                    <button class="bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 shadow-md transition">SIGN UP</button>
+                    <button class="bg-white text-black font-bold px-6 py-3 rounded-lg hover:bg-sky-400 shadow-md transition"><a href="/dist/book.html">BOOK NOW</a></button>
+                    <button class="bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 shadow-md transition"><a href="/dist/signUp.html">SIGN UP</a></button>
                 </div>
             </div>
         </div>
@@ -306,11 +298,13 @@
     <!-- footer ends -->
 
 
-</body>
+
 
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
   feather.replace()
 </script>
+
+</body>
 
 </html>

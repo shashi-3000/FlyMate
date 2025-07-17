@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-blue-950">
+    <!-- nav starts here -->
+    <nav class="w-full h-14 bg-gradient-to-r from-sky-700 via-sky-500 to-sky-300 shadow-md flex justify-between items-center px-4 md:px-6">
+            
+        <a href="/" class="text-2xl font-bold font-mullish text-white flex items-center tracking-wider">
+            FlyMate <span class="ml-2">✈️</span>
+        </a>
+
+        <ul class="font-mullish font-semibold hidden md:flex text-white ">
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="/dist/index.html">Explore</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="/dist/book.html">Book</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="#">Deals & Offers</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="#">Help & Support</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+        </ul>
+
+        <div class="hidden md:flex gap-3">
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
+        </div>
+
+        <div class="md:hidden">
+            <a class="text-4xl text-white" href="#">&#8801;</a>
+        </div>
+    </nav>
+    <!-- nav ends here -->
+
+    <!-- hero -->
+     <section class="min-h-[80vh] bg-blue-950 py-12 px-6 text-white">
+        <h2 class="text-3xl font-bold text-center mb-10">My Bookings</h2>
+        <div id="bookingList" class="space-y-6 max-w-4xl mx-auto"></div>
+    </section>
+
+    <!-- hero -->
+
+    <!-- Footer starts here -->
+    <footer class="bg-gradient-to-r from-sky-900 via-sky-700 to-sky-500 text-white p-10 mt-1">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        
+        <!-- Column 1: Logo & Tagline -->
+        <div class="px-7">
+        <h2 class="text-2xl font-bold mb-2">FlyMate ✈️</h2>
+        <p class="text-sm opacity-70">Connecting you to the skies — safely, comfortably, affordably.</p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div >
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm opacity-90">
+            <li><a href="#" class="hover:underline">Explore</a></li>
+            <li><a href="#" class="hover:underline">Book</a></li>
+            <li><a href="#" class="hover:underline">Deals & Offers</a></li>
+            <li><a href="#" class="hover:underline">Help & Support</a></li>
+        </ul>
+        </div>
+
+        <!-- Column 3: Contact & Socials -->
+        <div>
+        <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
+        <p class="text-sm opacity-70">Email: support@flymate.com</p>
+        <p class="text-sm opacity-70 mb-3">Phone: +91 98765 43210</p>
+        <div class="flex space-x-4 text-xl mt-2">
+            <a href="#" class="hover:text-blue-800"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-sky-800"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-red-600"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center text-sm opacity-70 mt-8 border-t border-slate-700 pt-4">
+        © 2025 FlyMate. All rights reserved.
+    </div>
+    </footer>
+    <!-- footer ends -->
+
+
+    <!-- ---------------------------------------------------------------------------- -->
+     <script>
+        const bookingList = document.getElementById("bookingList");
+        const bookings = JSON.parse(localStorage.getItem("confirmedBookings")) || [];
+
+        if (bookings.length === 0) {
+            bookingList.innerHTML = "<p class='text-center text-lg'>No bookings yet!</p>";
+        } else {
+            bookings.forEach((booking, index) => {
+            const card = document.createElement("div");
+            card.className = "bg-white text-blue-900 rounded-lg p-6 shadow";
+
+            card.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">Booking #${index + 1}</h3>
+                <p><strong>Airline:</strong> ${booking.airline}</p>
+                <p><strong>From:</strong> ${booking.from}</p>
+                <p><strong>To:</strong> ${booking.to}</p>
+                <p><strong>Departure:</strong> ${booking.departureDate}</p>
+                <p><strong>Return:</strong> ${booking.returnDate || "N/A"}</p>
+                <p><strong>Class:</strong> ${booking.travelClass}</p>
+                <p><strong>Passengers:</strong> ${booking.passengers}</p>
+                <p><strong>Departure Time:</strong> ${booking.depart}</p>
+                <p><strong>Arrival Time:</strong> ${booking.arrive}</p>
+                <p><strong>Price:</strong> ₹${booking.price}</p>
+                <p><strong>Booked At:</strong> ${new Date(booking.bookedAt).toLocaleString()}</p>
+            `;
+
+            bookingList.appendChild(card);
+            });
+        }
+    </script>
+
+
+</body>
+</html>

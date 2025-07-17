@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- nav starts here -->
+    <nav class="w-full h-14 bg-gradient-to-r from-sky-700 via-sky-500 to-sky-300 shadow-md flex justify-between items-center px-4 md:px-6">
+            
+        <a href="/" class="text-2xl font-bold font-mullish text-white flex items-center tracking-wider">
+            FlyMate <span class="ml-2">✈️</span>
+        </a>
+
+        <ul class="font-mullish font-semibold hidden md:flex text-white ">
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="/dist/index.html">Explore</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="/dist/book.html">Book</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="#">Deals & Offers</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+            <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
+                <a href="#">Help & Support</a>
+                <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
+            </li>
+        </ul>
+
+        <div class="hidden md:flex gap-3">
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
+            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
+        </div>
+
+        <div class="md:hidden">
+            <a class="text-4xl text-white" href="#">&#8801;</a>
+        </div>
+    </nav>
+    <!-- nav ends here -->
+
+    <!-- hero -->
+    <section class="min-h-[80vh] bg-blue-950 flex flex-col items-center justify-center px-4 py-12 text-white">
+        <div class="bg-white text-blue-900 shadow-xl rounded-xl p-8 w-full max-w-2xl space-y-6">
+            <h2 class="text-3xl font-bold text-center">Booking Confirmation</h2>
+            <div id="confirmationDetails" class="space-y-4 text-lg">
+            <!-- Booking details will appear here -->
+            </div>
+            <div class="flex justify-center">
+            <button id="finalConfirmBtn" class="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                Confirm Booking
+            </button>
+            </div>
+        </div>
+        <a href="index.html" class="bg-blue-800 text-white px-6 py-2 rounded hover:bg-blue-900 transition mt-8">Go to Home</a>
+        
+
+    </section>
+
+    <!-- hero -->
+
+
+    <!-- Footer starts here -->
+    <footer class="bg-gradient-to-r from-sky-900 via-sky-700 to-sky-500 text-white p-10 mt-1">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        
+        <!-- Column 1: Logo & Tagline -->
+        <div class="px-7">
+        <h2 class="text-2xl font-bold mb-2">FlyMate ✈️</h2>
+        <p class="text-sm opacity-70">Connecting you to the skies — safely, comfortably, affordably.</p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div >
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm opacity-90">
+            <li><a href="#" class="hover:underline">Explore</a></li>
+            <li><a href="#" class="hover:underline">Book</a></li>
+            <li><a href="#" class="hover:underline">Deals & Offers</a></li>
+            <li><a href="#" class="hover:underline">Help & Support</a></li>
+        </ul>
+        </div>
+
+        <!-- Column 3: Contact & Socials -->
+        <div>
+        <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
+        <p class="text-sm opacity-70">Email: support@flymate.com</p>
+        <p class="text-sm opacity-70 mb-3">Phone: +91 98765 43210</p>
+        <div class="flex space-x-4 text-xl mt-2">
+            <a href="#" class="hover:text-blue-800"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-sky-800"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-red-600"><i class="fab fa-youtube"></i></a>
+        </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center text-sm opacity-70 mt-8 border-t border-slate-700 pt-4">
+        © 2025 FlyMate. All rights reserved.
+    </div>
+    </footer>
+    <!-- footer ends -->
+
+
+
+
+
+
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+ <!-- scripttttt -->
+    <script>
+        const booking = JSON.parse(localStorage.getItem("bookingDetails"));
+        const flight = JSON.parse(localStorage.getItem("selectedFlight"));
+
+        const confirmBox = document.getElementById("confirmationDetails");
+
+        if (booking && flight) {
+            confirmBox.innerHTML = `
+            <p><strong>Airline:</strong> ${flight.airline}</p>
+            <p><strong>From:</strong> ${booking.from}</p>
+            <p><strong>To:</strong> ${booking.to}</p>
+            <p><strong>Departure Date:</strong> ${booking.departureDate}</p>
+            ${booking.returnDate ? `<p><strong>Return Date:</strong> ${booking.returnDate}</p>` : ""}
+            <p><strong>Class:</strong> ${booking.travelClass}</p>
+            <p><strong>Passengers:</strong> ${booking.passengers}</p>
+            <p><strong>Departure Time:</strong> ${flight.depart}</p>
+            <p><strong>Arrival Time:</strong> ${flight.arrive}</p>
+            <p><strong>Price:</strong> ₹${flight.price}</p>
+            `;
+        } else {
+            confirmBox.innerHTML = `<p class="text-red-600">No booking data found.</p>`;
+        }
+
+
+
+        //storing it in myBookings
+        document.getElementById("finalConfirmBtn").addEventListener("click", function () {
+            const booking = JSON.parse(localStorage.getItem("bookingDetails"));
+            const flight = JSON.parse(localStorage.getItem("selectedFlight"));
+
+            if (booking && flight) {
+                const confirmedBooking = {
+                ...booking,
+                ...flight,
+                bookedAt: new Date().toISOString()
+                };
+
+                const confirmedBookings = JSON.parse(localStorage.getItem("confirmedBookings")) || [];
+                confirmedBookings.push(confirmedBooking);
+                localStorage.setItem("confirmedBookings", JSON.stringify(confirmedBookings));
+
+                alert("Booking Confirmed!");
+                window.location.href = "index.html";
+            }
+        });
+
+    </script>
+
+
+</body>
+</html>
