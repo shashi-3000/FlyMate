@@ -159,7 +159,7 @@
     <!-- footer ends -->
 
 
-    <script>
+    <!-- <script>
         const flights = [
             {
                 id: 1,
@@ -253,7 +253,81 @@
                 });
             });
         }
+    </script> -->
+    <script src="routesGraph.js"></script>
+    <script>
+        document.getElementById("bookingForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const bookingDetails = {
+                from: document.getElementById("from").value,
+                to: document.getElementById("to").value,
+                departureDate: document.getElementById("departureDate").value,
+                returnDate: document.getElementById("returnDate").value,
+                travelClass: document.getElementById("travelClass").value,
+                passengers: parseInt(document.getElementById("passengers").value),
+            };
+
+            localStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
+
+            const route = dijkstra(bookingDetails.from, bookingDetails.to);
+
+            if (!route.path || route.path.length === 0) {
+                document.getElementById("flight-results").innerHTML = "<p class='text-white text-center'>No flights found.</p>";
+                return;
+            }
+
+            const matches = [];
+            for (let i = 0; i < route.path.length - 1; i++) {
+                const from = route.path[i];
+                const to = route.path[i + 1];
+                const segment = graph[from][to];
+                matches.push({
+                    airline: "FlyMate Airways",
+                    from,
+                    to,
+                    depart: "08:00 AM",
+                    arrive: "11:00 AM",
+                    price: segment.price
+                });
+            }
+
+            displayFlights(matches);
+        });
+
+        function displayFlights(flightList) {
+            const results = document.getElementById("flight-results");
+            results.innerHTML = "";
+
+            flightList.forEach((flight, index) => {
+                const card = document.createElement("div");
+                card.className = "bg-white p-6 rounded-lg shadow text-blue-900";
+
+                card.innerHTML = `
+                    <h3 class="text-2xl font-bold">${flight.airline}</h3>
+                    <p><strong>From:</strong> ${flight.from}</p>
+                    <p><strong>To:</strong> ${flight.to}</p>
+                    <p><strong>Departure:</strong> ${flight.depart}</p>
+                    <p><strong>Arrival:</strong> ${flight.arrive}</p>
+                    <p><strong>Price:</strong> ₹${flight.price}</p>
+                    <button class="mt-3 px-4 py-2 bg-blue-800 text-white rounded book-btn" data-id="${index}">
+                        Book Now
+                    </button>
+                `;
+
+                results.appendChild(card);
+            });
+
+            document.querySelectorAll(".book-btn").forEach((btn, i) => {
+                btn.addEventListener("click", () => {
+                    localStorage.setItem("selectedFlight", JSON.stringify(flightList[i]));
+                    window.location.href = "confirm.html";
+                });
+            });
+        }
     </script>
+
+
 
 </body>
 </html>
