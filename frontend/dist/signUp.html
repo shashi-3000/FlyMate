@@ -34,8 +34,10 @@
         </ul>
 
         <div class="hidden md:flex gap-3">
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
+            <button id="login" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/login.html">Login</a></button>
+            <button id="signup" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/signUp.html">Sign Up</a></button>
+            <button id="mybookings" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/myBookings.html">My Bookings</a></button>
+            <button id="logout" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Logout</button>
         </div>
 
         <div class="md:hidden">
@@ -51,8 +53,12 @@
             <h2 class="text-[34px] font-bold text-center text-blue-900">Create an Account</h2>
 
             <div>
-            <label for="name" class="block font-semibold text-blue-800 mb-1">Full Name</label>
-            <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
+            <label for="fullname" class="block font-semibold text-blue-800 mb-1">Full Name</label>
+            <input type="text" id="fullname" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
+            </div>
+            <div>
+            <label for="username" class="block font-semibold text-blue-800 mb-1">Username</label>
+            <input type="text" id="username" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
             </div>
 
             <div>
@@ -114,5 +120,111 @@
         </div>
     </footer>
     <!-- footer -->
+
+
+
+
+
+    <!-- JS STARTSSSSSS FROMMM HEREEEE -->
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault(); // prevent default form reload
+
+            const fullname = document.getElementById("fullname").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirm = document.getElementById("confirm").value.trim();
+
+            // 1️⃣ Basic Validation
+            if (!fullname || !username || !email || !password || !confirm) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (password !== confirm) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            // 2️⃣ API Call to Backend
+            try {
+                const res = await fetch("http://localhost:5000/api/v1/users/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fullname,
+                        username,
+                        email,
+                        password,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // 3️⃣ Store Tokens in Local Storage
+                    localStorage.setItem("accessToken", data.data.accessToken);
+                    localStorage.setItem("refreshToken", data.data.refreshToken);
+
+                    alert("Account created successfully! Redirecting to login...");
+                    window.location.href = "login.html";
+                } else {
+                    alert(data.message || "Something went wrong during registration.");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Server error, please try again later.");
+            }
+        });
+
+
+
+        //adding logout logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("accessToken");
+
+            const loginBtn = document.getElementById("login");
+            const signupBtn = document.getElementById("signup");
+            const logoutBtn = document.getElementById("logout");
+            const myBookingsBtn = document.getElementById("mybookings");
+
+            if (token) {
+                loginBtn.style.display = "none";
+                signupBtn.style.display = "none";
+                myBookingsBtn.style.display = "inline-block";
+                logoutBtn.style.display = "inline-block";
+            } else {
+                loginBtn.style.display = "inline-block";
+                signupBtn.style.display = "inline-block";
+                myBookingsBtn.style.display = "none";
+                logoutBtn.style.display = "none";
+            }
+
+            logoutBtn.addEventListener("click", async () => {
+                try {
+                    await fetch("http://localhost:5000/api/v1/users/logout", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+                } finally {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    alert("Logged out successfully!");
+                    window.location.href = "/frontend/dist/login.html";
+                }
+            });
+        });
+
+
+    </script>
+
+
 </body>
 </html>

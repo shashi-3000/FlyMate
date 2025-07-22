@@ -34,8 +34,10 @@
         </ul>
 
         <div class="hidden md:flex gap-3">
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
+            <button id="login" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/login.html">Login</a></button>
+            <button id="signup" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/signUp.html">Sign Up</a></button>
+            <button id="mybookings" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/myBookings.html">My Bookings</a></button>
+            <button id="logout" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Logout</button>
         </div>
 
         <div class="md:hidden">
@@ -95,6 +97,97 @@
     </footer>
     <!-- footer ends -->
 
+
+
+
+
+    <!-- JS STARTSSSSS -->
+     <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const bookingList = document.getElementById("bookingList");
+            const token = localStorage.getItem("accessToken");
+
+            if (!token) {
+            bookingList.innerHTML = "<p class='text-center text-red-400'>Please log in to view your bookings.</p>";
+            return;
+            }
+
+            try {
+            const response = await fetch("http://localhost:5000/api/v1/bookings/my-bookings", {
+                method: "GET",
+                headers: {
+                "Authorization": `Bearer ${token}`
+                },
+            });
+
+            const result = await response.json();
+
+            if (!result.success || !result.data || result.data.length === 0) {
+                bookingList.innerHTML = "<p class='text-center text-gray-400'>No bookings found.</p>";
+                return;
+            }
+
+            result.data.forEach(booking => {
+                const bookingCard = document.createElement("div");
+                bookingCard.className = "p-6 bg-white text-blue-900 rounded-lg shadow";
+                bookingCard.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${booking.from} ➡️ ${booking.to}</h3>
+                <p>Departure: ${new Date(booking.departureDate).toLocaleDateString()}</p>
+                <p>Return: ${booking.returnDate ? new Date(booking.returnDate).toLocaleDateString() : 'N/A'}</p>
+                <p>Class: ${booking.travelClass}</p>
+                <p>Passengers: ${booking.passengers}</p>
+                <p>Max Stops: ${booking.maxStops}</p>
+                `;
+                bookingList.appendChild(bookingCard);
+            });
+
+            } catch (error) {
+            bookingList.innerHTML = "<p class='text-center text-red-400'>Failed to fetch bookings.</p>";
+            }
+        });
+
+
+
+
+        //adding logout logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("accessToken");
+
+            const loginBtn = document.getElementById("login");
+            const signupBtn = document.getElementById("signup");
+            const logoutBtn = document.getElementById("logout");
+            const myBookingsBtn = document.getElementById("mybookings");
+
+            if (token) {
+                loginBtn.style.display = "none";
+                signupBtn.style.display = "none";
+                myBookingsBtn.style.display = "inline-block";
+                logoutBtn.style.display = "inline-block";
+            } else {
+                loginBtn.style.display = "inline-block";
+                signupBtn.style.display = "inline-block";
+                myBookingsBtn.style.display = "none";
+                logoutBtn.style.display = "none";
+            }
+
+            logoutBtn.addEventListener("click", async () => {
+                try {
+                    await fetch("http://localhost:5000/api/v1/users/logout", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+                } finally {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    alert("Logged out successfully!");
+                    window.location.href = "/frontend/dist/login.html";
+                }
+            });
+        });
+
+    </script>
 
 </body>
 </html>

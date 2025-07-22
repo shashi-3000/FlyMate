@@ -34,8 +34,10 @@
         </ul>
 
         <div class="hidden md:flex gap-3">
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/login.html">Login</a></button>
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/dist/signUp.html">Sign Up</a></button>
+            <button id="login" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/login.html">Login</a></button>
+            <button id="signup" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/signUp.html">Sign Up</a></button>
+            <button id="mybookings" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/myBookings.html">My Bookings</a></button>
+            <button id="logout" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Logout</button>
         </div>
 
         <div class="md:hidden">
@@ -169,6 +171,260 @@
     </div>
     </footer>
     <!-- footer ends -->
+
+
+
+
+
+    <!-- JS STARTSSSS -->
+     <!-- <script>
+
+        const bookingForm = document.getElementById("bookingForm");
+
+        bookingForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+            const departureDate = document.getElementById("departureDate").value;
+            const returnDate = document.getElementById("returnDate").value;
+            const travelClass = document.getElementById("travelClass").value;
+            const passengers = document.getElementById("passengers").value;
+            const maxStops = document.getElementById("maxStops").value;
+
+            const accessToken = localStorage.getItem("accessToken");
+
+            try {
+                const res = await fetch("http://localhost:5000/api/v1/bookings/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify({
+                        from,
+                        to,
+                        departureDate,
+                        returnDate,
+                        travelClass,
+                        passengers,
+                        maxStops,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    alert(data.message || "Something went wrong");
+                    return;
+                }
+
+                alert("Booking Successful! ✅");
+                window.location.href = "/frontend/dist/myBookings.html";
+            } catch (error) {
+                alert("Error occurred: " + error.message);
+            }
+        });
+
+
+
+
+
+
+        //adding logout and button logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("accessToken");
+
+            const loginBtn = document.getElementById("login");
+            const signupBtn = document.getElementById("signup");
+            const logoutBtn = document.getElementById("logout");
+            const myBookingsBtn = document.getElementById("mybookings");
+
+            if (token) {
+                loginBtn.style.display = "none";
+                signupBtn.style.display = "none";
+                myBookingsBtn.style.display = "inline-block";
+                logoutBtn.style.display = "inline-block";
+            } else {
+                loginBtn.style.display = "inline-block";
+                signupBtn.style.display = "inline-block";
+                myBookingsBtn.style.display = "none";
+                logoutBtn.style.display = "none";
+            }
+
+            logoutBtn.addEventListener("click", async () => {
+                try {
+                    await fetch("http://localhost:5000/api/v1/users/logout", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+                } finally {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    alert("Logged out successfully!");
+                    window.location.href = "/frontend/dist/login.html";
+                }
+            });
+        });
+
+    </script> -->
+
+    <script>
+        const dummyFlights = [
+            {
+                from: "Delhi",
+                to: "London",
+                airline: "Air India",
+                departureDate: "2025-08-01",
+                returnDate: "2025-08-10",
+                price: "₹50,000",
+                stops: 1,
+                travelClass: "Economy"
+            },
+            {
+                from: "Mumbai",
+                to: "Paris",
+                airline: "Air France",
+                departureDate: "2025-08-03",
+                returnDate: "2025-08-11",
+                price: "₹55,000",
+                stops: 2,
+                travelClass: "Business"
+            },
+            {
+                from: "Delhi",
+                to: "London",
+                airline: "British Airways",
+                departureDate: "2025-08-01",
+                returnDate: "2025-08-10",
+                price: "₹48,000",
+                stops: 0,
+                travelClass: "Economy"
+            },
+        ];
+
+        const bookingForm = document.getElementById("bookingForm");
+        const flightResults = document.getElementById("flight-results");
+
+        bookingForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            flightResults.innerHTML = "";
+
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+
+            const matchingFlights = dummyFlights.filter(
+                (flight) => flight.from === from && flight.to === to
+            );
+
+            if (matchingFlights.length === 0) {
+                flightResults.innerHTML = "<p class='text-center text-gray-400'>No flights found for this route.</p>";
+                return;
+            }
+
+            matchingFlights.forEach((flight) => {
+                const card = document.createElement("div");
+                card.className = "p-6 bg-white text-blue-900 rounded-lg shadow";
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold mb-2">${flight.from} ➡️ ${flight.to}</h3>
+                    <p>Airline: ${flight.airline}</p>
+                    <p>Departure: ${flight.departureDate}</p>
+                    <p>Return: ${flight.returnDate}</p>
+                    <p>Class: ${flight.travelClass}</p>
+                    <p>Stops: ${flight.stops}</p>
+                    <p>Price: ${flight.price}</p>
+                    <button class="mt-4 bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-900 transition book-now">Book Now</button>
+                `;
+
+                card.querySelector(".book-now").addEventListener("click", () =>
+                    bookFlight(flight)
+                );
+
+                flightResults.appendChild(card);
+            });
+        });
+
+        async function bookFlight(flight) {
+            const accessToken = localStorage.getItem("accessToken");
+
+            try {
+                const res = await fetch("http://localhost:5000/api/v1/bookings/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify({
+                        from: flight.from,
+                        to: flight.to,
+                        departureDate: flight.departureDate,
+                        returnDate: flight.returnDate,
+                        travelClass: flight.travelClass,
+                        passengers: 1,
+                        maxStops: flight.stops,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    alert(data.message || "Something went wrong");
+                    return;
+                }
+
+                alert("Booking Successful! ✅");
+                window.location.href = "/frontend/dist/myBookings.html";
+            } catch (error) {
+                alert("Error occurred: " + error.message);
+            }
+        }
+
+
+        
+        // logout
+        //adding logout and button logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("accessToken");
+
+            const loginBtn = document.getElementById("login");
+            const signupBtn = document.getElementById("signup");
+            const logoutBtn = document.getElementById("logout");
+            const myBookingsBtn = document.getElementById("mybookings");
+
+            if (token) {
+                loginBtn.style.display = "none";
+                signupBtn.style.display = "none";
+                myBookingsBtn.style.display = "inline-block";
+                logoutBtn.style.display = "inline-block";
+            } else {
+                loginBtn.style.display = "inline-block";
+                signupBtn.style.display = "inline-block";
+                myBookingsBtn.style.display = "none";
+                logoutBtn.style.display = "none";
+            }
+
+            logoutBtn.addEventListener("click", async () => {
+                try {
+                    await fetch("http://localhost:5000/api/v1/users/logout", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                        },
+                    });
+                } finally {
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    alert("Logged out successfully!");
+                    window.location.href = "/frontend/dist/login.html";
+                }
+            });
+        });
+        
+    </script>
+
+
 
 </body>
 </html>

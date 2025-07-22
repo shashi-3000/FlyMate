@@ -36,8 +36,10 @@
         </ul>
 
         <div class="hidden md:flex gap-3">
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/login.html">Login</a></button>
-            <button class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/signUp.html">Sign Up</a></button>
+            <button id="login" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/login.html">Login</a></button>
+            <button id="signup" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/signUp.html">Sign Up</a></button>
+            <button id="mybookings" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition"><a href="/frontend/dist/myBookings.html">My Bookings</a></button>
+            <button id="logout" class="px-4 py-2 bg-sky-900 text-white rounded-lg shadow hover:bg-grayBlue transition">Logout</button>
         </div>
 
         <div class="md:hidden">
@@ -303,6 +305,46 @@
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
   feather.replace()
+
+
+  //adding logout logic
+    document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("accessToken");
+
+        const loginBtn = document.getElementById("login");
+        const signupBtn = document.getElementById("signup");
+        const logoutBtn = document.getElementById("logout");
+        const myBookingsBtn = document.getElementById("mybookings");
+
+        if (token) {
+            loginBtn.style.display = "none";
+            signupBtn.style.display = "none";
+            myBookingsBtn.style.display = "inline-block";
+            logoutBtn.style.display = "inline-block";
+        } else {
+            loginBtn.style.display = "inline-block";
+            signupBtn.style.display = "inline-block";
+            myBookingsBtn.style.display = "none";
+            logoutBtn.style.display = "none";
+        }
+
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await fetch("http://localhost:5000/api/v1/users/logout", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                });
+            } finally {
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+                alert("Logged out successfully!");
+                window.location.href = "/frontend/dist/login.html";
+            }
+        });
+    });
+
 </script>
 
 </body>

@@ -25,7 +25,6 @@ import bookRouter from "./routes/book.routes.js";
 app.use("/api/v1/bookings", bookRouter);
 
 
-
 export default app;
 
 
