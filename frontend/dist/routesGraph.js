@@ -1,14 +1,3 @@
-// const graph = {
-//   "Delhi": { "Dubai": { price: 12000 }, "Mumbai": { price: 3000 } },
-//   "Mumbai": { "London": { price: 42000 }, "Dubai": { price: 25000 } },
-//   "Dubai": { "Tokyo": { price: 28000 }, "London": { price: 20000 } },
-//   "London": { "Paris": { price: 9000 } },
-//   "Paris": { "New York": { price: 35000 } },
-//   "Tokyo": { "New York": { price: 45000 } },
-//   "Kolkata": { "Delhi": { price: 4000 } },
-//   "Chennai": { "Mumbai": { price: 5000 } },
-//   "Bengaluru": { "Delhi": { price: 4500 } }
-// };
 
 const graph = {
   "Delhi": { "Dubai": { price: 12000 }, "Mumbai": { price: 3000 } },

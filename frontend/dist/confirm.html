@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGN UP</title>
+    <title>Confirm</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-blue-950">
+<body>
     <!-- nav starts here -->
     <nav class="w-full h-14 bg-gradient-to-r from-sky-700 via-sky-500 to-sky-300 shadow-md flex justify-between items-center px-4 md:px-6">
             
@@ -16,11 +16,11 @@
 
         <ul class="font-mullish font-semibold hidden md:flex text-white ">
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="/dist/index.html">Explore</a>
+                <a href="/frontend/dist/index.html">Explore</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="#">Book</a>
+                <a href="/frontend/dist/book.html">Book</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
@@ -44,75 +44,73 @@
     </nav>
     <!-- nav ends here -->
 
-    
     <!-- hero -->
-    <section class="flex justify-center items-center relative bg-cover bg-center min-h-[100vh] px-4 bg-blue-950 p-24" style="background-image: url(/src/images/plane1.jpg);">
-        <form class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md space-y-6">
-            <h2 class="text-[34px] font-bold text-center text-blue-900">Create an Account</h2>
-
-            <div>
-            <label for="name" class="block font-semibold text-blue-800 mb-1">Full Name</label>
-            <input type="text" id="name" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
+    <section class="min-h-[80vh] bg-blue-950 flex flex-col items-center justify-center px-4 py-12 text-white">
+        <div class="bg-white text-blue-900 shadow-xl rounded-xl p-8 w-full max-w-2xl space-y-6">
+            <h2 class="text-3xl font-bold text-center">Booking Confirmation</h2>
+            <div id="confirmationDetails" class="space-y-4 text-lg">
+            <!-- Booking details will appear here -->
             </div>
-
-            <div>
-            <label for="email" class="block font-semibold text-blue-800 mb-1">Email</label>
-            <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
+            <div class="flex justify-center">
+            <button id="finalConfirmBtn" class="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                Confirm Booking
+            </button>
             </div>
-
-            <div>
-            <label for="password" class="block font-semibold text-blue-800 mb-1">Password</label>
-            <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
-            </div>
-
-            <div>
-            <label for="confirm" class="block font-semibold text-blue-800 mb-1">Confirm Password</label>
-            <input type="password" id="confirm" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-sky-400" />
-            </div>
-
-            <button type="submit" class="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-900 transition">Sign Up</button>
-
-            <p class="text-sm text-center text-gray-700">
-            Already have an account?
-            <a href="login.html" class="text-blue-600 font-semibold hover:underline">Login here</a>
-            </p>
-        </form>
-    </section>
-    <!-- hero -->
-
-
-    <!-- Footer -->
-    <footer class="bg-gradient-to-r from-sky-900 via-sky-700 to-sky-500 text-white p-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="px-7">
-            <h2 class="text-2xl font-bold mb-2">FlyMate ✈️</h2>
-            <p class="text-sm opacity-70">Connecting you to the skies — safely, comfortably, affordably.</p>
         </div>
-        <div>
-            <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-            <ul class="space-y-2 text-sm opacity-90">
+        <a href="index.html" class="bg-blue-800 text-white px-6 py-2 rounded hover:bg-blue-900 transition mt-8">Go to Home</a>
+        
+
+    </section>
+
+    <!-- hero -->
+
+
+    <!-- Footer starts here -->
+    <footer class="bg-gradient-to-r from-sky-900 via-sky-700 to-sky-500 text-white p-10 mt-1">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        
+        <!-- Column 1: Logo & Tagline -->
+        <div class="px-7">
+        <h2 class="text-2xl font-bold mb-2">FlyMate ✈️</h2>
+        <p class="text-sm opacity-70">Connecting you to the skies — safely, comfortably, affordably.</p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div >
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm opacity-90">
             <li><a href="#" class="hover:underline">Explore</a></li>
             <li><a href="#" class="hover:underline">Book</a></li>
             <li><a href="#" class="hover:underline">Deals & Offers</a></li>
             <li><a href="#" class="hover:underline">Help & Support</a></li>
-            </ul>
+        </ul>
         </div>
+
+        <!-- Column 3: Contact & Socials -->
         <div>
-            <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
-            <p class="text-sm opacity-70">Email: support@flymate.com</p>
-            <p class="text-sm opacity-70 mb-3">Phone: +91 98765 43210</p>
-            <div class="flex space-x-4 text-xl mt-2">
+        <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
+        <p class="text-sm opacity-70">Email: support@flymate.com</p>
+        <p class="text-sm opacity-70 mb-3">Phone: +91 98765 43210</p>
+        <div class="flex space-x-4 text-xl mt-2">
             <a href="#" class="hover:text-blue-800"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="hover:text-sky-800"><i class="fab fa-twitter"></i></a>
             <a href="#" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
             <a href="#" class="hover:text-red-600"><i class="fab fa-youtube"></i></a>
-            </div>
         </div>
         </div>
-        <div class="text-center text-sm opacity-70 mt-8 border-t border-slate-700 pt-4">
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="text-center text-sm opacity-70 mt-8 border-t border-slate-700 pt-4">
         © 2025 FlyMate. All rights reserved.
-        </div>
+    </div>
     </footer>
-    <!-- footer -->
+    <!-- footer ends -->
+
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+
+
 </body>
 </html>

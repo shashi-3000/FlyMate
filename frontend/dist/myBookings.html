@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm</title>
+    <title>My Bookings</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-blue-950">
     <!-- nav starts here -->
     <nav class="w-full h-14 bg-gradient-to-r from-sky-700 via-sky-500 to-sky-300 shadow-md flex justify-between items-center px-4 md:px-6">
             
@@ -16,11 +16,11 @@
 
         <ul class="font-mullish font-semibold hidden md:flex text-white ">
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="/dist/index.html">Explore</a>
+                <a href="/frontend/dist/index.html">Explore</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
-                <a href="/dist/book.html">Book</a>
+                <a href="/frontend/dist/book.html">Book</a>
                 <div class="absolute left-0 bottom-[-4px] w-full h-[2px] bg-slate-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 "></div>
             </li>
             <li class="relative mx-[10px] font-mullish cursor-pointer hover:text-slate-900 transition-all duration-200 group">
@@ -45,25 +45,12 @@
     <!-- nav ends here -->
 
     <!-- hero -->
-    <section class="min-h-[80vh] bg-blue-950 flex flex-col items-center justify-center px-4 py-12 text-white">
-        <div class="bg-white text-blue-900 shadow-xl rounded-xl p-8 w-full max-w-2xl space-y-6">
-            <h2 class="text-3xl font-bold text-center">Booking Confirmation</h2>
-            <div id="confirmationDetails" class="space-y-4 text-lg">
-            <!-- Booking details will appear here -->
-            </div>
-            <div class="flex justify-center">
-            <button id="finalConfirmBtn" class="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                Confirm Booking
-            </button>
-            </div>
-        </div>
-        <a href="index.html" class="bg-blue-800 text-white px-6 py-2 rounded hover:bg-blue-900 transition mt-8">Go to Home</a>
-        
-
+     <section class="min-h-[80vh] bg-blue-950 py-12 px-6 text-white">
+        <h2 class="text-3xl font-bold text-center mb-10">My Bookings</h2>
+        <div id="bookingList" class="space-y-6 max-w-4xl mx-auto"></div>
     </section>
 
     <!-- hero -->
-
 
     <!-- Footer starts here -->
     <footer class="bg-gradient-to-r from-sky-900 via-sky-700 to-sky-500 text-white p-10 mt-1">
@@ -107,62 +94,6 @@
     </div>
     </footer>
     <!-- footer ends -->
-
-
-
-
-
-
-
-<!-- -------------------------------------------------------------------------------------------------- -->
- <!-- scripttttt -->
-    <script>
-        const booking = JSON.parse(localStorage.getItem("bookingDetails"));
-        const flight = JSON.parse(localStorage.getItem("selectedFlight"));
-
-        const confirmBox = document.getElementById("confirmationDetails");
-
-        if (booking && flight) {
-            confirmBox.innerHTML = `
-            <p><strong>Airline:</strong> ${flight.airline}</p>
-            <p><strong>From:</strong> ${booking.from}</p>
-            <p><strong>To:</strong> ${booking.to}</p>
-            <p><strong>Departure Date:</strong> ${booking.departureDate}</p>
-            ${booking.returnDate ? `<p><strong>Return Date:</strong> ${booking.returnDate}</p>` : ""}
-            <p><strong>Class:</strong> ${booking.travelClass}</p>
-            <p><strong>Passengers:</strong> ${booking.passengers}</p>
-            <p><strong>Departure Time:</strong> ${flight.depart}</p>
-            <p><strong>Arrival Time:</strong> ${flight.arrive}</p>
-            <p><strong>Price:</strong> ₹${flight.price}</p>
-            `;
-        } else {
-            confirmBox.innerHTML = `<p class="text-red-600">No booking data found.</p>`;
-        }
-
-
-
-        //storing it in myBookings
-        document.getElementById("finalConfirmBtn").addEventListener("click", function () {
-            const booking = JSON.parse(localStorage.getItem("bookingDetails"));
-            const flight = JSON.parse(localStorage.getItem("selectedFlight"));
-
-            if (booking && flight) {
-                const confirmedBooking = {
-                ...booking,
-                ...flight,
-                bookedAt: new Date().toISOString()
-                };
-
-                const confirmedBookings = JSON.parse(localStorage.getItem("confirmedBookings")) || [];
-                confirmedBookings.push(confirmedBooking);
-                localStorage.setItem("confirmedBookings", JSON.stringify(confirmedBookings));
-
-                alert("Booking Confirmed!");
-                window.location.href = "index.html";
-            }
-        });
-
-    </script>
 
 
 </body>
