@@ -6,29 +6,29 @@ FlyMate is a full-stack flight booking application that allows users to search, 
 ### 📸 Screenshots#
 
 ### Home Page
-![HomePage](./Screenshots/Homepage.png)
-![HomePage](./Screenshots/img.png)
-![HomePage](./Screenshots/img2.png)
-![HomePage](./Screenshots/img3.png)
-![HomePage](./Screenshots/footer.png)
+![HomePage](./screenshots/Homepage.png)
+![HomePage](./screenshots/img.png)
+![HomePage](./screenshots/img2.png)
+![HomePage](./screenshots/img3.png)
+![HomePage](./screenshots/footer.png)
 
 ### Signup Page
-![Signup](./Screenshots/signup.png)
-![Signup](./Screenshots/signup2.png)
-![Signup](./Screenshots/signup3.png)
-![Signup](./Screenshots/signup4.png)
+![Signup](./screenshots/signup.png)
+![Signup](./screenshots/signup2.png)
+![Signup](./screenshots/signup3.png)
+![Signup](./screenshots/signup4.png)
 
 ### Login Page
-![Login](./Screenshots/login.png)
-![Login](./Screenshots/login2.png)
-![Login](./Screenshots/login3.png)
+![Login](./screenshots/login.png)
+![Login](./screenshots/login2.png)
+![Login](./screenshots/login3.png)
 
 ### Booking Page
-![Movie](./Screenshots/book.png)
-![Movie](./Screenshots/book2.png)
-![Movie](./Screenshots/book3.png)
-![Movie](./Screenshots/book4.png)
+![Movie](./screenshots/book.png)
+![Movie](./screenshots/book2.png)
+![Movie](./screenshots/book3.png)
+![Movie](./screenshots/book4.png)
 
 ### MyBookings 
-![MyBookings](./Screenshots/myBookings.png)
+![MyBookings](./screenshots/myBookings.png)
 
