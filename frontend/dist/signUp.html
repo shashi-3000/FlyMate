@@ -48,7 +48,7 @@
 
     
     <!-- hero -->
-    <section class="flex justify-center items-center relative bg-cover bg-center min-h-[100vh] px-4 bg-blue-950 p-24" style="background-image: url(/src/images/plane1.jpg);">
+    <section class="flex justify-center items-center relative bg-cover bg-center min-h-[100vh] px-4 bg-blue-950 p-24" style="background-image: url(/frontend/src/images/plane1.jpg);">
         <form class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md space-y-6">
             <h2 class="text-[34px] font-bold text-center text-blue-900">Create an Account</h2>
 
@@ -180,7 +180,51 @@
                 console.error(error);
                 alert("Server error, please try again later.");
             }
+        // });
+        // try {
+        //     const res = await fetch("http://localhost:5000/api/v1/users/register", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({
+        //             fullname,
+        //             username,
+        //             email,
+        //             password,
+        //         }),
+        //     });
+
+        //     // Clone the response stream so we can read it multiple times
+        //     const text = await res.text();
+
+        //     let data;
+        //     try {
+        //         data = JSON.parse(text);
+        //     } catch (err) {
+        //         data = text; // fallback to raw text
+        //     }
+
+        //     console.log("✅ res.ok:", res.ok);
+        //     console.log("📦 Full response body:", data);
+
+        //     if (res.ok) {
+        //         localStorage.setItem("accessToken", data.data.accessToken);
+        //         localStorage.setItem("refreshToken", data.data.refreshToken);
+
+        //         alert("Account created successfully! Redirecting to login...");
+        //         window.location.href = "login.html";
+        //     } else {
+        //         alert(data.message || data || "Something went wrong during registration.");
+        //     }
+        // } catch (error) {
+        //     console.error("❌ Fetch error:", error);
+        //     alert("Network error or server unreachable.");
+        // }
+
+
         });
+
 
 
 
